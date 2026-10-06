@@ -2834,7 +2834,7 @@ document.querySelectorAll(".soc-handle").forEach(el => { el.textContent = SOCIAL
 
 let SOC_FILTER = "", LB_LIST = [], LB_I = 0;
 const socTile = (s, i) => `<button type="button" onclick="openLB(${i})" class="group text-left">
-    <span class="photo block aspect-[9/16] rounded-xl"><img src="social/${s.f}-s.jpg" alt="${s.alt}" loading="lazy"></span>
+    <span class="photo block aspect-[9/16] rounded-xl"><img src="img-${s.f}-s.jpg" alt="${s.alt}" loading="lazy"></span>
     <span class="flex items-center justify-between gap-2 mt-2 font-mono text-[11px] text-secondary"><span data-notr>${s.place}</span><span class="material-symbols-outlined text-[15px] opacity-0 group-hover:opacity-100 transition-opacity">open_in_full</span></span>
     ${s.tag ? `<span class="inline-flex items-center gap-1 mt-1.5 px-2.5 h-6 rounded-full border border-primary font-mono text-[10px] text-primary"><span class="material-symbols-outlined text-[13px]">sailing</span><span>Con</span> <span data-notr>${s.tag.name}</span></span>` : ""}
   </button>`;
@@ -2856,11 +2856,11 @@ function openLB(i){
 }
 function showLB(){
   const s = LB_LIST[LB_I];
-  $("lbImg").src = `social/${s.f}.jpg`; $("lbImg").alt = s.alt;
+  $("lbImg").src = `img-${s.f}.jpg`; $("lbImg").alt = s.alt;
   const t = $("lbTag"); t.hidden = !s.tag;
   if (s.tag) { t.href = s.tag.href; $("lbTagName").textContent = s.tag.name; }
   $("lbCount").textContent = `${String(LB_I + 1).padStart(2, "0")} / ${String(LB_LIST.length).padStart(2, "0")}`;
-  const nx = LB_LIST[(LB_I + 1) % LB_LIST.length]; new Image().src = `social/${nx.f}.jpg`;
+  const nx = LB_LIST[(LB_I + 1) % LB_LIST.length]; new Image().src = `img-${nx.f}.jpg`;
 }
 function stepLB(d){ LB_I = (LB_I + d + LB_LIST.length) % LB_LIST.length; showLB(); }
 document.addEventListener("click", e => { if (e.target.closest("#lbTag")) closeLB(); });
@@ -2900,7 +2900,7 @@ function renderLlegar(){
   $("llgFilters").innerHTML = pill("", "Todo") + LLG_MODES.filter(([m]) => LLEGAR.some(s => s.mode === m)).map(([m, l, ic]) => pill(m, l, ic)).join("");
   const list = LLEGAR.filter(s => !LLG_FILTER || s.mode === LLG_FILTER);
   $("llgGrid").innerHTML = list.map((s, i) => `<button type="button" data-i="${i}" class="group text-left">
-    <span class="photo block aspect-[9/16] rounded-xl"><img src="social/${s.f}-s.jpg" alt="${s.alt}" loading="lazy"></span>
+    <span class="photo block aspect-[9/16] rounded-xl"><img src="img-${s.f}-s.jpg" alt="${s.alt}" loading="lazy"></span>
     <span class="flex items-center justify-between gap-2 mt-2 font-mono text-[11px] text-secondary"><span>${(LLG_MODES.find(x => x[0] === s.mode) || [,""])[1]}</span><span class="material-symbols-outlined text-[15px] opacity-0 group-hover:opacity-100 transition-opacity">open_in_full</span></span>
   </button>`).join("");
 }
